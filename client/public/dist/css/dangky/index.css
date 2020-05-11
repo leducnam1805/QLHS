@@ -1,0 +1,36 @@
+*{
+  margin:0;
+  padding:0;
+}
+body {
+  background-color: aquamarine !important;
+}
+
+table {
+  margin:10% auto;
+  background-color: gainsboro
+}
+
+th {
+  font-size: 30px;
+  padding: 10px;
+}
+
+td {
+  font-size: 20px;
+  padding: 5px;
+}
+
+input {
+  height: 30px;
+  line-height: 30px;
+  margin: 5px;
+}
+
+button {
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none;
+}

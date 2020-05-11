@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./dist/css/dangky/index.css">
+  <title>Sign Up</title>
+</head>
+<header>
+  <%- include('../../pagination/header.ejs') %>
+</header>
+
+<body>
+  <form action="./dangky/insert" method="post">
+    <table border="2" width="400px" align="center">
+      <tr>
+        <th colspan="2">Đăng Ký</th>
+      </tr>
+      <tr>
+        <td>UserName</td>
+        <td><input type="text" name="UserName" placeholder="Tên đăng nhập" size="30"></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="text" name="Password" placeholder="Mật khẩu" size="30"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input type="submit" value="Đăng ký"><br>
+          <span>Bạn đã có tài khoản??</span>&nbsp;<a href="/login">Đăng nhập</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+</body>
+<% if(message!="") { 
+  %>
+<script>
+  Swal.fire(
+    '<%-message %>',
+    '<p style="font-size:20px;color:#66CC66">Tạo Mới Thành Công..!</p>',
+    'success'
+  )
+</script>
+<% } 
+%>
+
+</html>

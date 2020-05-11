@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="../dist/css/login/index.css">
+  <script src="../plugins/jquery/jquery.min.js"></script>
+  <script src="../dist/js/login/index.js"></script>
+</head>
+
+<body>
+  <form action="./dangnhap/passport" method="POST">
+    <table border=2 width="400" align="center">
+      <tr>
+        <th colspan="2">Đăng Nhập</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" name="username" placeholder="Tên đăng nhập" autocomplete="off"> </td>
+        <td>
+          <input type="text" name="password" placeholder="Mât khẩu" autocomplete="off">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input type="submit" value="Đăng nhập">
+          <br>
+          <span>Bạn chưa có tài khoản??</span>&nbsp;<a href="/dangky">Đăng ký</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+
+</html>

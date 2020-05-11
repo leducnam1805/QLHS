@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../pagination/header.ejs') %>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+
+    <!-- Navbar -->
+
+    <header>
+      <%- include('../pagination/header.ejs') %>
+    </header>
+    <menu>
+      <%- include('../pagination/menu.ejs') %>
+    </menu>
+    <!-- content -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+      <%- include('pagination/content.ejs') %>
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- content -->
+    <footer class="main-footer">
+      <%- include('pagination/footer.ejs') %>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+  <footer>
+    <%- include('../pagination/footer.ejs') %>
+  </footer>
+</body>
+
+</html>
