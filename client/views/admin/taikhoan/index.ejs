@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include('../../pagination/header.ejs') %>
+  <script type="text/javascript" src="../dist/js/taikhoan/index.js"></script>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+
+    <!-- Navbar -->
+
+    <header>
+      <%- include('../pagination/header.ejs') %>
+    </header>
+    <menu>
+      <%- include('../../pagination/menu.ejs') %>
+    </menu>
+    <!-- content -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">
+                Trang Chủ&nbsp;
+                <small class="text-secondary">Trang quản lý tài khoản hệ thống</small>
+              </h1>
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-dashboard"></i>Trang Chủ</a></li>
+                <li class="breadcrumb-item active">Tài Khoản</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <div class="content bg-white border-top-10">
+        <div class="content-header">
+          <h3 class="float-left text-secondary">Danh sách tài khoản</h3>
+          <input class="form-control float-right col-md-4" type="text" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="content-table">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên Tài Khoản</th>
+                <th scope="col">
+                  <button type="button" class="btn btn-success" title="Thêm" data-toggle="modal"
+                    data-target="#exampleModal-them">
+                    <i class="fas fa-plus-square text-warning"></i>&nbsp;&nbsp;Thêm mới
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% ds.forEach((e,i) => {%>
+              <tr class="role=row">
+                <td><%= i+1 %></td>
+                <td><%= e.user_login %></td>
+                <td>
+                  <button idtk="<%- e.id_login %>" type="button" class="btn btn-success views-edit" title="Xem"
+                    data-toggle="modal" data-target="#exampleModal-xem">
+                    <i class="fa fa-check text-warning"></i>
+                  </button>
+                  <button idtk="<%- e.id_login %>" type="button" class="btn btn-info edit-taikhoan" title="Đổi mật khẩu"
+                    data-toggle="modal" data-target="#exampleModal-edit">
+                    <i class="fa fa-edit text-warning"></i>
+                  </button>
+                  <button idtk="<%- e.id_login %>" type="button" class="btn btn-danger del-taikhoan" title="Xóa"
+                    data-toggle="modal" data-target="#exampleModal-del">
+                    <i class="fa fa-eraser text-warning"></i>
+                  </button>
+                </td>
+              </tr>
+              <%
+        });
+      %>
+            </tbody>
+          </table>
+        </div>
+        <!-- Modal them -->
+        <div class="modal fade" id="exampleModal-them" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> <strong>Thêm tài khoản</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form method="POST" action="./QLTaiKhoan/insert" enctype="application/x-www-form-urlencoded">
+                <div class="modal-body" style="background-color:mintcream;">
+                  <!-- <form method="POST" action="./Ql_TinhTrang/insert"> -->
+                  <div class="form-group">
+                    <label for="exampleInputusername">Tên tài khoản</label>
+                    <input name="ten_taikhoan" type="text" class="form-control" id="exampleInputusername"
+                      aria-describedby="emailHelp" placeholder="Username">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword">Mật khẩu</label>
+                    <input name="pass_taikhoan" type="password" class="form-control" id="exampleInputPassword"
+                      placeholder="Password">
+                  </div>
+                  <!-- </form> -->
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- modal them -->
+        <!-- Modal xem -->
+        <div class="modal fade" id="exampleModal-xem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> <strong>Xem thông tin tài khoản</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form method="POST">
+                <div class="modal-body" style="background-color:mintcream;">
+                  <div class="form-group">
+                    <input class="form-control" type="hidden" id="viewseditidtaikhoan" aria-describedby="emailHelp"
+                      placeholder="id" readonly>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputusername">Tên tài khoản</label>
+                    <input class="form-control" id="views-edit-name-taikhoan" aria-describedby="emailHelp"
+                      placeholder="Username" readonly>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- modal xem -->
+        <!-- Modal edit -->
+        <div class="modal fade" id="exampleModal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> <strong>Chỉnh sửa thông tin tài khoản</strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form method="POST" action="/QLTaiKhoan/edit">
+                <div class="modal-body" style="background-color:mintcream;">
+                  <div class="form-group">
+                    <input name="id_taikhoan" class="form-control" type="hidden" id="edit-id-taikhoan"
+                      aria-describedby="emailHelp" placeholder="id">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputusername">Tên tài khoản</label>
+                    <input name="name_taikhoan" class="form-control" id="edit-name-taikhoan"
+                      aria-describedby="emailHelp" placeholder="Username">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputusername">Mật khẩu mới</label>
+                    <input name="pass_taikhoan" class="form-control" type="password" id="edit-pass-taikhoan"
+                      aria-describedby="emailHelp" placeholder="Password">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                  <button type="edit" class="btn btn-primary">Sửa</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- modal edit -->
+      </div>
+      <!-- /.content-header -->
+      <!-- pagination -->
+      <nav aria-label="...">
+        <ul class="pagination pagination-sm justify-content-center">
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">15</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="...">
+        <ul class="pagination pagination-sm justify-content-center">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">
+              1
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- pagination -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- content -->
+    <footer class="main-footer">
+      <%- include('../pagination/footer.ejs') %>
+    </footer>
+    <script>
+
+    </script>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+  <footer>
+    <%- include('../../pagination/footer.ejs') %>
+  </footer>
+</body>
+<% if(successmessage!="") { 
+  %>
+<script>
+  Swal.fire(
+    '<%-successmessage %>',
+    '<p style="font-size:20px;color:#66CC66">Đăng ký thành công..!</p>',
+    'success'
+  )
+</script>
+<% } 
+%>
+<% if(errormessage!="") { 
+  %>
+<script>
+  Swal.fire(
+    '<%-errormessage %>',
+    '<p style="font-size:20px;color:#66CC66">Đăng ký thất bại..!</p>',
+    'error'
+  )
+</script>
+<% } 
+%>
+<% if(successmessageedit!="") { 
+  %>
+<script>
+  Swal.fire(
+    '<%-successmessageedit %>',
+    '<p style="font-size:20px;color:#66CC66">Đổi mật khẩu thành công..!</p>',
+    'success'
+  )
+</script>
+<% } 
+%>
+
+</html>

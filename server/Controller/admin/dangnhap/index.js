@@ -18,30 +18,31 @@ router.get("/", async (req, res) => {
       successmessage: req.flash('successmessage'),
       errormessage: req.flash('errormessage')
     }
-    res.render("./admin/dangky/index.ejs", send);
+    res.render("./admin/dangnhap/index.ejs", send);
   } catch (error) {
     res.send("error -- 500");
     res.end();
     console.log(error);
   }
 });
-//insert
-router.post("/insert", express.urlencoded({ extended: true }), async (req, res) => {
+//auth
+router.post("/auth", async (req, res) => {
   try {
-    let username = req.body.UserName;
-    let pass = md5(req.body.Password)
-    if (req.body.UserName == '' || req.body.UserName == null || req.body.UserName == undefined) {
-      req.flash('errormessage', 'Thất Bại');
-      res.redirect("/dangky")
-    } else {
-      let sql = squel.insert()
-        .into("tbl_login")
-        .set("user_login", username)
-        .set("pass_login", pass)
-        .toString()
-      await query(sql);
+    let username = req.body.username;
+    let pass = md5(req.body.password)
+    let sql = squel.select()
+      .field("count(id_login)")
+      .from("tbl_login")
+      .where("user_login = '" + username + "'")
+      .where("pass_login = '" + pass + "'")
+      .toString()
+    let danhsach = await query(sql)
+    if (danhsach.rows[0].count > 0) {
       req.flash('successmessage', 'Thành Công');
-      res.redirect("/dangky")
+      // res.redirect("/admin")
+    } else {
+      req.flash('errormessage', 'Thất Bại');
+      res.redirect("/dangnhap")
     }
   } catch (error) {
     res.send("error --- 500");

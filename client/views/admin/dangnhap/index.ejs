@@ -7,11 +7,11 @@
   <title>Login</title>
   <link rel="stylesheet" href="../dist/css/login/index.css">
   <script src="../plugins/jquery/jquery.min.js"></script>
-  <script src="../dist/js/login/index.js"></script>
+  <script src="../dist/js/dangnhap/index.js"></script>
 </head>
 
 <body>
-  <form action="./dangnhap/passport" method="POST">
+  <form action="./dangnhap/auth" method="POST">
     <table border=2 width="400" align="center">
       <tr>
         <th colspan="2">Đăng Nhập</th>
@@ -33,5 +33,27 @@
     </table>
   </form>
 </body>
+<% if(successmessage!="") { 
+  %>
+<script>
+  Swal.fire(
+    '<%-successmessage %>',
+    '<p style="font-size:20px;color:#66CC66">Đăng nhập thành công..!</p>',
+    'success'
+  )
+</script>
+<% } 
+%>
+<% if(errormessage!="") { 
+  %>
+<script>
+  Swal.fire(
+    '<%-errormessage %>',
+    '<p style="font-size:20px;color:#66CC66">Đăng nhập thất bại..!</p>',
+    'error'
+  )
+</script>
+<% } 
+%>
 
 </html>
